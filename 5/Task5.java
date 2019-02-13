@@ -4,10 +4,10 @@ import java.io.InputStreamReader;
 
 public class Task5 {
     public static void main(String[] args) {
-        System.out.println("Введите число");
+        System.out.println("Enter a number");
         int number = enterNumber();
-        System.out.println("Среднее арифметическое: "+arithmeticAverage(number)
-                +"\nСреднее геометрическое: "+geometricAverage(number));
+        System.out.println("The arithmetic mean: "+arithmeticAverage(number)
+                +"\nThe geometric mean: "+geometricAverage(number));
     }
 
     private static double arithmeticAverage(int number) {

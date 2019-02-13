@@ -19,14 +19,14 @@ class Task3 {
         return radius;
     }
     private void counting() {
-        System.out.println("Введите первый, больший, радиус:");
+        System.out.println("Enter the first, larger, radius:");
         int R1=enterRadius();
-        System.out.println("Введите второй, меньший, радиус:");
+        System.out.println("Enter the second, smaller, radius:");
         int R2=enterRadius();
         if (R1 > R2) {
-            System.out.println("Площадь: " + square(R1, R2));
+            System.out.println("Square: " + square(R1, R2));
         } else {
-            System.out.println("Не соответствует условию");
+            System.out.println("Does not match the requirement");
         }
     }
     private  double square(int R1, int R2) {

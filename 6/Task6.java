@@ -4,15 +4,15 @@ import java.io.InputStreamReader;
 
 public class Task6 {
     public static void main(String []args){
-        System.out.println("Введите число:");
+        System.out.println("Enter a number:");
         int number = enterNumber();
         revers(number);
     }
     private static void revers(int number){
         StringBuilder stringBuilder=new StringBuilder(String.valueOf(number));
         String reversNumber =stringBuilder.reverse().toString();
-        System.out.println("Было: "+number
-                +"\nСтало: "+reversNumber);
+        System.out.println("Was: "+number
+                +"\nBecome: "+reversNumber);
 
     }
     private static int enterNumber() {

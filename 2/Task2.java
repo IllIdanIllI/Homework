@@ -4,12 +4,12 @@ import java.io.InputStreamReader;
 
 class Task2 {
     public static void main(String[] args) {
-        System.out.println("Введите сколько весит ваш динозавр в кг:");
+        System.out.println("Enter how much your dinosaur weighs in kg:");
         int kilo = enterMass();
         long gram = kilo * 1000;
         long milligram = gram * 10;
         float ton = (float) kilo / 100;
-        System.out.println("Наш дино весит:" + kilo + "кг " + gram + "г " + milligram + "мг " + ton + "тонны");
+        System.out.println("Our Dino weighs:" + kilo + "kg " + gram + "g " + milligram + "mg " + ton + "ton");
     }
 
     private static int enterMass() {

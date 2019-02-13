@@ -4,20 +4,20 @@ import java.io.InputStreamReader;
 
 public class Task7 {
     public static void main(String[] args) {
-        System.out.println("Введите первую переменную: ");
+        System.out.println("Enter the first variable: ");
         int firstVariable = enterVariable();
-        System.out.println("Введите первую переменную: ");
+        System.out.println("Enter the second variable: ");
         int secondVariable = enterVariable();
         changePosition(firstVariable,secondVariable);
     }
     private static void changePosition(int firstVariable,int secondVariable){
-        System.out.println("Первая переменная: "+firstVariable
-                +"\nВторая переменная: "+secondVariable+"\n");
+        System.out.println("First variable: "+firstVariable
+                +"\nSecond variable: "+secondVariable+"\n");
         firstVariable=firstVariable+secondVariable;
         secondVariable = firstVariable-secondVariable;
         firstVariable=firstVariable-secondVariable;
-        System.out.println("Первая переменная: "+firstVariable
-                +"\nВторая переменная: "+secondVariable);
+        System.out.println("First variable: "+firstVariable
+                +"\nSecond variable: "+secondVariable);
     }
     private static int enterVariable() {
         int variable = 0;

@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class Task4 {
     public static void main(String[] args) {
-        System.out.println("Введите свое число: ");
+        System.out.println("Enter your number: ");
         String number = enterNumber();
         check(number);
 
@@ -21,11 +21,11 @@ public class Task4 {
             }
         }
         if (countUp == temp.length - 1) {
-            System.out.println("Возрастание");
+            System.out.println("Increase");
         } else if (countDown == temp.length - 1) {
-            System.out.println("Убывание");
+            System.out.println("Decrease");
         } else {
-            System.out.println("Тут нет нужной последовательности");
+            System.out.println("There's no sequence we need");
         }
     }
 

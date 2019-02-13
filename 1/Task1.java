@@ -20,11 +20,11 @@ class Task1 {
     }
 
     private void userInput() {
-        System.out.println("ВВедите первое число: ");
+        System.out.println("Enter the first number: ");
         int numberOne = enterNumber();
-        System.out.println("ВВедите второе число: ");
+        System.out.println("Enter the second number: ");
         int numberTwo = enterNumber();
-        System.out.println("ВВедите третье число: ");
+        System.out.println("Enter the third number: ");
         int numberThree = enterNumber();
         comparison(numberOne, numberTwo, numberThree);
     }
@@ -32,11 +32,11 @@ class Task1 {
     private void comparison(int numberOne, int numberTwo, int numberThree) {
 
         if (numberOne == numberTwo && numberThree == numberTwo) {
-            System.out.println("Все равны");
+            System.out.println("All numbers are the same");
         } else if (numberOne != numberTwo && numberThree != numberTwo && numberOne != numberThree) {
-            System.out.println("Все не равны");
+            System.out.println("All numbers arent the same");
         } else {
-            System.out.println("Что-то равно");
+            System.out.println("Some numbers are the same");
         }
     }
 }
