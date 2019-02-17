@@ -21,7 +21,7 @@ public class Task7 {
         System.out.println("First variable: "+firstVariable
                 +"\nSecond variable: "+secondVariable);
     }
-    private int enterVariable() {
+    private static int enterVariable() {
         int number = 0;
         String input;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

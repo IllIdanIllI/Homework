@@ -14,7 +14,7 @@ class Task2 {
         System.out.println("Our Dino weighs:" + kilo + "kg " + gram + "g " + milligram + "mg " + ton + "ton");
     }
 
-    private int enterMass() {
+    private static int enterMass() {
         int number = 0;
         String input;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

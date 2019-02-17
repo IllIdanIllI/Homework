@@ -29,7 +29,7 @@ public class Task5 {
         }
         return Math.pow(multiplication,((double)1/temp.length));
     }
-    private int enterNumber() {
+    private static int enterNumber() {
         int number = 0;
         String input;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

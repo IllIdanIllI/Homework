@@ -19,7 +19,7 @@ public class Task6 {
 
     }
 
-    private int enterNumber() {
+    private static int enterNumber() {
         int number = 0;
         String input;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
