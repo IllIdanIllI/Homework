@@ -37,7 +37,7 @@ public class Task6 {
     }
 
     private static boolean isValidInput(String input) {
-        Pattern pattern = Pattern.compile("[0-9]");
+        Pattern pattern = Pattern.compile("[0-9]*");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }

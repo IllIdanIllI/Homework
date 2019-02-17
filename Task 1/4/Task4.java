@@ -31,8 +31,8 @@ public class Task4 {
         }
     }
 
-    private int enterNumber() {
-        int number = 0;
+    private static String enterNumber() {
+        String number = "";
         String input;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
@@ -41,14 +41,14 @@ public class Task4 {
                 System.out.println("!!!Please, enter correct number from 0 to 9!!!");
                 input = br.readLine();
             }
-            number = Integer.parseInt(input);
+            number = input;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return number;
     }
     private static boolean isValidInput(String input) {
-        Pattern pattern = Pattern.compile("[0-9]");
+        Pattern pattern = Pattern.compile("[0-9]*");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
