@@ -17,8 +17,7 @@ class Task2 {
     private static int enterMass() {
         int number = 0;
         String input;
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try {
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             input = br.readLine();
             while(!isValidInput(input)) {
                 System.out.println("!!!Please, enter correct number from 0 to 9!!!");
@@ -31,7 +30,7 @@ class Task2 {
         return number;
     }
     private static boolean isValidInput(String input) {
-        Pattern pattern = Pattern.compile("[0-9]*");
+        Pattern pattern = Pattern.compile("[0-9]+");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }

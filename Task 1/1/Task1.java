@@ -27,7 +27,7 @@ class Task1 {
         return number;
     }
     private static boolean isValidInput(String input) {
-        Pattern pattern = Pattern.compile("[0-9]*");
+        Pattern pattern = Pattern.compile("[0-9]+");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
