@@ -1,9 +1,8 @@
 package main;
 
 
-import entity.Gift;
-import service.GiftHandler;
-import service.impl.SweetnessHandler;
+import service.GiftHandlerService;
+import service.impl.SweetnessHandlerServiceImpl;
 
 public class MainClass {
 
@@ -15,7 +14,7 @@ public class MainClass {
 //        Optional<Integer> result  = number.max(Integer::compareTo);
 //        result.ifPresent(line -> System.out.println("Your line: "+line));
 //        System.out.println(result.map(o -> "Found").orElse("Not found"));
-        GiftHandler gift = new SweetnessHandler();
+        GiftHandlerService gift = new SweetnessHandlerServiceImpl();
         gift.makeTheGift();
     }
 }

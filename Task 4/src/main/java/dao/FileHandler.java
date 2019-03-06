@@ -2,8 +2,8 @@ package dao;
 
 import entity.Sweetness;
 import org.apache.log4j.Logger;
-import service.GiftHandler;
-import service.impl.SweetnessHandler;
+import service.GiftHandlerService;
+import service.impl.SweetnessHandlerServiceImpl;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,8 +15,7 @@ public class FileHandler {
 
     public List readFile() {
         DataFromFileHandler handler = new DataFromFileHandler();
-        GiftHandler giftHandler = new SweetnessHandler();
-//        Sweetness sweet;
+        GiftHandlerService giftHandler = new SweetnessHandlerServiceImpl();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)))) {
             List<Sweetness> list = new ArrayList<>();
             String line;
@@ -26,7 +25,7 @@ public class FileHandler {
                 list.add(giftHandler.createSweets(handler.sendCreateObj(line)));
             }
             return list;
-            // отсюда коллекция пойдет в GiftHandler
+            // отсюда коллекция пойдет в GiftHandlerService
         } catch (IOException e) {
             log.error(e);
         }

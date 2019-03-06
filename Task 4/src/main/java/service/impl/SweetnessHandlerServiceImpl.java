@@ -1,44 +1,45 @@
 package service.impl;
 
+import dao.CandyFileReader;
 import dao.FileHandler;
-import service.GiftHandler;
+import dao.impl.CandyFileReaderImpl;
+import service.CountValueService;
+import service.GiftHandlerService;
 import entity.Sweetness;
 import entity.impl.Candy;
 import entity.impl.Chocolate;
 import entity.impl.Marshmallow;
+import service.SortItemService;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class SweetnessHandler implements GiftHandler{
+public class SweetnessHandlerServiceImpl implements GiftHandlerService {
     private List<Sweetness> list;
     Sweetness sweet;
 
     @Override
     public void makeTheGift() {
-        FileHandler handler = new FileHandler();
-        list = new ArrayList<Sweetness>(handler.readFile());
+        CandyFileReaderImpl reader = new CandyFileReaderImpl();
+        CountValueService countValue = new CountValueServiceImpl();
+        SortItemService sort = new SortItemServiceImpl();
+        list = new ArrayList<Sweetness>(reader.readFile());
         for (Sweetness i : list) {
             System.out.println(i);
         }
-        System.out.println("Weight of the gift is " + countWeight() + " g");
-        sortSweets();
+//        System.out.println("Weight of the gift is " + countValue.countWeight(list) + " g");
+//        sortSweets();
+//        System.out.println();
+//        for (Sweetness i : list) {
+//            System.out.println(i);
+//        }
         System.out.println();
-        for (Sweetness i : list) {
-            System.out.println(i);
-        }
-        System.out.println();
-        find_In_Range_Of_Suger((short) 3,(short)7);
+        sort.sortBySugarPresence(list);
+//        find_In_Range_Of_Sugar((short) 3,(short)7);
     }
 
-    int countWeight() {
-        int sum = 0;
-        for (Sweetness i : list) {
-            sum += i.getWeight() * i.getQuantity();
-        }
-        return sum;
-    }
+
 
     @Override
     public void sortSweets() {
@@ -46,7 +47,7 @@ public class SweetnessHandler implements GiftHandler{
     }
 
     @Override
-    public void find_In_Range_Of_Suger(short low,short high) {
+    public void find_In_Range_Of_Sugar(short low, short high) {
         for (Sweetness i : list) {
             if(i.getSugarValue()>low && i.getSugarValue()<high) {
                 System.out.println(i);

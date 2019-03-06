@@ -1,14 +1,5 @@
 package entity;
 
-import dao.FileHandler;
-import entity.Sweetness;
-import service.GiftHandler;
-import service.impl.SweetnessHandler;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Gift {
 
     public void isGift() {

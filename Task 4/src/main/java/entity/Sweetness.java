@@ -68,4 +68,7 @@ public abstract class Sweetness {
                 " g, quantity = " + quantity +
                 '}';
     }
+    public abstract void setForm(String form);
+
+    public abstract String getForm();
 }

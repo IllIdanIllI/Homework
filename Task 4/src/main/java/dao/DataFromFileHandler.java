@@ -1,11 +1,11 @@
 package dao;
 
-import service.impl.SweetnessHandler;
+import service.impl.SweetnessHandlerServiceImpl;
 import entity.Sweetness;
 
-class DataFromFileHandler {
-    String[] sendCreateObj(String line) {
-        SweetnessHandler sHandler = new SweetnessHandler();
+public class DataFromFileHandler {
+    public String[] sendCreateObj(String line) {
+        SweetnessHandlerServiceImpl sHandler = new SweetnessHandlerServiceImpl();
         String split[] = line.split(",");
         return split;
     }
