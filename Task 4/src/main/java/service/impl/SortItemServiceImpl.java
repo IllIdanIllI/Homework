@@ -9,30 +9,43 @@ import java.util.List;
 public class SortItemServiceImpl implements SortItemService {
     @Override
     public void sortByName(List<Sweetness> list) {
-
+        for (int i=0;i<list.size()-2;i++){
+            int min = i;
+            int charIndex = 0;
+            for(int j=i+1;j<list.size();j++){
+                    if (list.get(j).getName().charAt(charIndex)
+                            < list.get(min).getName().charAt(charIndex)) {
+                        min = j;
+                    } else if(list.get(j).getName().charAt(charIndex)
+                            == list.get(min).getName().charAt(charIndex)){
+                        charIndex++;
+                    }
+            }
+            if(min!=i){
+                swap(list,i,min);
+            }
+        }
+        list.forEach(System.out::println);
     }
 
     @Override
     public void sortByWeight(List<Sweetness> list) {
-        for (int i=0;i<list.size()-2;i++){
+        for (int i=0;i<list.size()-1;i++){
             int min = i;
-            for(int j=i+1;j<list.size()-1;j++){
+            for(int j=i+1;j<list.size();j++){
                 if(list.get(j).getWeight()<list.get(min).getWeight()){
                     min = j;
                 }
             }
-            if(min<i){
+            if(min!=i){
                 swap(list,i,min);
             }
         }
+        list.forEach(System.out::println);
     }
 
     @Override
     public void sortBySugarPresence(List<Sweetness> list) {
-//        int values[]=new int[isMaxValue(list)];
-//        for(int i=0;i<list.size();i++){
-//            values[list.get(i).getSugarValue()]++;
-//        }
         ArrayList<Sweetness>[] bucketsArray = new ArrayList[10];
         for (int i=0;i<bucketsArray.length;i++){
             bucketsArray[i] = new ArrayList<>();
@@ -78,8 +91,6 @@ public class SortItemServiceImpl implements SortItemService {
     }
     private void swap(List<Sweetness> list, int i, int min){
         list.add(i,list.get(min));
-        list.add(min,list.get(i));
-        list.remove(i+1);
         list.remove(min+1);
     }
 }

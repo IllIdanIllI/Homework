@@ -3,7 +3,7 @@ package entity;
 public class Gift {
 
     public void isGift() {
-//        System.out.println(Arrays.toString(handler.readFile()));
+//        System.out.println(Arrays.toString(handler.createListOfSweets()));
 
 
     }

@@ -11,19 +11,21 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CandyFileReaderImpl implements CandyFileReader {
+public class CandyFileReaderImpl implements CandyFileReader, AutoCloseable {
+
     private final static Logger LOGGER = Logger.getLogger(CandyFileReaderImpl.class);
     private final static String FILE_PATH_TO_DATA = "src\\main\\resources\\data.txt";
+    private static BufferedReader reader;
 
-        public List readFile() {
+    public List createListOfSweets() {
         DataFromFileHandler handler = new DataFromFileHandler();
         GiftHandlerService giftHandler = new SweetnessHandlerServiceImpl();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(FILE_PATH_TO_DATA)))) {
+        Sweetness sweetness;
+        try {
             List<Sweetness> list = new ArrayList<>();
-            String line;
-            while (br.ready()) {
-                line = br.readLine();
-                list.add(giftHandler.createSweets(handler.sendCreateObj(line)));
+            while (reader.ready()) {
+                sweetness =giftHandler.createSweets(handler.sendParamsForOqj(read()));
+                list.add(sweetness);
             }
             return list;
         } catch (IOException e) {
@@ -32,25 +34,29 @@ public class CandyFileReaderImpl implements CandyFileReader {
         return null;
     }
 
+    static {
+        try {
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(FILE_PATH_TO_DATA)));
+        } catch (FileNotFoundException e) {
+            LOGGER.error(e);
+        }
+    }
 
     @Override
     public String read() {
-//        DataFromFileHandler handler = new DataFromFileHandler();
-//        GiftHandlerService giftHandler = new SweetnessHandlerServiceImpl();
-////        Sweetness sweet;
-//        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(FILE_PATH_TO_DATA)))) {
-//            List<Sweetness> list = new ArrayList<>();
-//            String line;
-//            while (br.ready()) {
-////                sb.append(System.lineSeparator());
-//                line = br.readLine();
-//                list.add(giftHandler.createSweets(handler.sendCreateObj(line)));
-//            }
-//            return list;
-//            // отсюда коллекция пойдет в GiftHandlerService
-//        } catch (IOException e) {
-//            LOGGER.error(e);
-//        }
+        try {
+//                sb.append(System.lineSeparator());
+//                list.add(giftHandler.createSweets(handler.sendParamsForOqj(line)));
+            return reader.readLine();
+            // отсюда коллекция пойдет в GiftHandlerService
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
         return null;
+    }
+
+    @Override
+    public void close() throws Exception {
+        reader.close();
     }
 }
