@@ -8,7 +8,7 @@ import java.io.*;
 public class CandyFileReaderImpl implements CandyFileReader, AutoCloseable {
 
     private final static Logger LOGGER = Logger.getLogger(CandyFileReaderImpl.class);
-    private final static String FILE_PATH_TO_DATA = "src\\main\\resources\\data.txt";
+    private final static String FILE_PATH_TO_DATA = "src\\controller\\resources\\data.txt";
     private static BufferedReader reader;
 
     public BufferedReader getReader() {

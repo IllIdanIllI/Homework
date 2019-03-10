@@ -6,6 +6,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataValidateHelper {
+    private static final DataValidateHelper dataValidateHelper = new DataValidateHelper();
+
+    private DataValidateHelper() {
+    }
+
+    public static DataValidateHelper getDataValidateHelper() {
+        return dataValidateHelper;
+    }
 
     public String isValidName(String name) {
         if (checkMatch(ConstantRegex.NAME_REGEX.get(), name)) {
@@ -48,9 +56,9 @@ public class DataValidateHelper {
         }
         return null;
     }
-    public boolean conditionForSend(String type, String name,
-                                    short sugarValue, int weight,
-                                    short quantity,  String form){
+    public boolean areConditionRight(String type, String name,
+                                     short sugarValue, int weight,
+                                     short quantity, String form){
         return name != null && type != null
                 && sugarValue > 0 && weight > 0
                 && quantity > 0 && form != null;

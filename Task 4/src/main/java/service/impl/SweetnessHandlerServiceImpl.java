@@ -10,8 +10,8 @@ import entity.impl.Candy;
 import entity.impl.Chocolate;
 import entity.impl.Marshmallow;
 import service.helper.DataValidateHelper;
-import service.menu.SwitchCase;
-import service.userInput.InputData;
+import controller.menu.SwitchCase;
+import controller.userInput.InputData;
 
 import java.io.IOException;
 import java.util.*;
@@ -58,18 +58,23 @@ public class SweetnessHandlerServiceImpl implements GiftHandlerService {
     }
 
     @Override
-    public Optional<Sweetness> createSweets(String[] param) {
-        if (param.length != 6) {
+    public Optional<Sweetness> createSweets(String[] sweetnessParams) {
+        if (sweetnessParams.length != 6) {
             return Optional.empty();
         }
-        DataValidateHelper helper = new DataValidateHelper();
-        String type = helper.isValidType(param[0]);
-        String name = helper.isValidName(param[1]);
-        short sugarValue = helper.isValidSugarValue(param[2]);
-        int weight = helper.isValidWeight(param[3]);
-        short quantity = helper.isValidQuantity(param[4]);
-        String form = helper.isValidForm(param[5]);
-        if (helper.conditionForSend(type, name,
+        DataValidateHelper helper = DataValidateHelper.getDataValidateHelper();
+        String type = helper.isValidType(sweetnessParams[0]);
+        String name = helper.isValidName(sweetnessParams[1]);
+        short sugarValue = helper.isValidSugarValue(sweetnessParams[2]);
+        int weight = helper.isValidWeight(sweetnessParams[3]);
+        short quantity = helper.isValidQuantity(sweetnessParams[4]);
+        String form = helper.isValidForm(sweetnessParams[5]);
+        return createNewSweetness(helper,type, name, sugarValue, weight, quantity, form);
+    }
+
+    private Optional<Sweetness> createNewSweetness(DataValidateHelper helper, String type, String name,
+                                                   short sugarValue, int weight, short quantity, String form) {
+        if (helper.areConditionRight(type, name,
                 sugarValue, weight, quantity, form)) {
             switch (type.toUpperCase()) {
                 case ConstantType.CANDY:
