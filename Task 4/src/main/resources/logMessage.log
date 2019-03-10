@@ -2,3 +2,4 @@
 2019-03-02 12:47:11 INFO  [main]: NaN
 2019-03-04 12:38:58 ERROR [main]: java.io.FileNotFoundException: data.txt (Не удается найти указанный файл)
 2019-03-05 11:53:47 ERROR [main]: java.io.FileNotFoundException: \src\main\resources\data.txt (Системе не удается найти указанный путь)
+2019-03-07 19:26:26 ERROR [main]: java.lang.ArrayIndexOutOfBoundsException: 3

@@ -1,47 +1,45 @@
 package service.impl;
 
+import service.DataFromFileHandler;
 import dao.impl.CandyFileReaderImpl;
-import service.CountValueService;
-import service.FilterValueService;
+import entity.constant.ConstantType;
+import org.apache.log4j.Logger;
 import service.GiftHandlerService;
 import entity.Sweetness;
 import entity.impl.Candy;
 import entity.impl.Chocolate;
 import entity.impl.Marshmallow;
-import service.SortItemService;
 import service.helper.DataValidateHelper;
+import service.menu.SwitchCase;
+import service.userInput.InputData;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 
 public class SweetnessHandlerServiceImpl implements GiftHandlerService {
     private List<Sweetness> list;
+    private final static Logger LOGGER = Logger.getLogger(SweetnessHandlerServiceImpl.class);
     Sweetness sweet;
 
     @Override
     public void makeTheGift() {
-        CandyFileReaderImpl reader = new CandyFileReaderImpl();
-        CountValueService countValue = new CountValueServiceImpl();
-        SortItemService sort = new SortItemServiceImpl();
-        FilterValueService filter = new FilterValueServiceImpl();
-        list = new ArrayList<Sweetness>(reader.createListOfSweets());
-        for (Sweetness i : list) {
-            System.out.println(i);
+        list = new ArrayList<>(createListOfSweets());
+        if (list.size() == 0) {
+            System.out.println("Check file!");
+        } else {
+            for (Sweetness i : list) {
+                System.out.println(i);
+            }
+            SwitchCase choice = new SwitchCase();
+            try {
+                choice.userChoice(list);
+            } catch (IOException e) {
+                LOGGER.error(e);
+            } finally {
+                InputData.closeStream();
+            }
         }
-        System.out.println();
-        sort.sortBySugarPresence(list);
-        System.out.println();
-        sort.sortByName(list);
-        System.out.println();
-        sort.sortByWeight(list);
-        System.out.println();
-        filter.filterByType(list, "candy");
-        System.out.println();
-        filter.filterByForm(list, "circle");
-        System.out.println();
-        filter.find_In_Range_Of_Sugar(list, (short) 3, (short) 7);
-//        find_In_Range_Of_Sugar((short) 3,(short)7);
+
     }
 
 
@@ -51,7 +49,7 @@ public class SweetnessHandlerServiceImpl implements GiftHandlerService {
     }
 
     @Override
-    public void find_In_Range_Of_Sugar(short low, short high) {
+    public void findInRangeOfSugar(short low, short high) {
         for (Sweetness i : list) {
             if (i.getSugarValue() > low && i.getSugarValue() < high) {
                 System.out.println(i);
@@ -60,7 +58,10 @@ public class SweetnessHandlerServiceImpl implements GiftHandlerService {
     }
 
     @Override
-    public Sweetness createSweets(String[] param) {
+    public Optional<Sweetness> createSweets(String[] param) {
+        if (param.length != 6) {
+            return Optional.empty();
+        }
         DataValidateHelper helper = new DataValidateHelper();
         String type = helper.isValidType(param[0]);
         String name = helper.isValidName(param[1]);
@@ -71,34 +72,41 @@ public class SweetnessHandlerServiceImpl implements GiftHandlerService {
         if (helper.conditionForSend(type, name,
                 sugarValue, weight, quantity, form)) {
             switch (type.toUpperCase()) {
-                case "CANDY":
-                    return new Candy(type, name, sugarValue,
-                            weight, quantity, form);
-                case "MARSHMALLOW":
-                    return new Marshmallow(type, name, sugarValue,
-                            weight, quantity, form);
-                case "CHOCOLATE":
-                    return new Chocolate(type, name, sugarValue,
-                            weight, quantity, form);
+                case ConstantType.CANDY:
+                    return Optional.of(new Candy(type, name, sugarValue,
+                            weight, quantity, form));
+                case ConstantType.MARSHMALLOW:
+                    return Optional.of(new Marshmallow(type, name, sugarValue,
+                            weight, quantity, form));
+                case ConstantType.CHOCOLATE:
+                    return Optional.of(new Chocolate(type, name, sugarValue,
+                            weight, quantity, form));
                 default:
-                    return null;
+                    return Optional.empty();
             }
         } else {
-            return null;
+            return Optional.empty();
         }
+    }
 
-//        if (type.toUpperCase().equals("CANDY")) {
-//            return new Candy(type, name, sugarValue,
-//                    weight, quantity, form);
-//        } else if (type.toUpperCase().equals("MARSHMALLOW")) {
-//            return new Marshmallow(type, name, sugarValue,
-//                    weight, quantity, form);
-//        } else if (type.toUpperCase().equals("CHOCOLATE")) {
-//            return new Chocolate(type, name, sugarValue,
-//                    weight, quantity, form);
-//        } else {
-//            return null;
-//        }
+    private List createListOfSweets() {
+        try (CandyFileReaderImpl reader = new CandyFileReaderImpl()) {
+            DataFromFileHandler handler = new DataFromFileHandler();
+            GiftHandlerService giftHandler = new SweetnessHandlerServiceImpl();
+            Optional<Sweetness> optionalSweetness;
+            List<Sweetness> sweetnessList = new ArrayList<>();
+            while (reader.getReader().ready()) {
+                String[] sweetnessParameters = handler.sendParamsForOqj(reader.read());
+                optionalSweetness = giftHandler.createSweets(sweetnessParameters);
+                optionalSweetness.ifPresent(sweetnessList::add);
+            }
+            return sweetnessList;
+        } catch (IOException e) {
+            LOGGER.error(e);
+        } catch (Exception e) {
+            LOGGER.error(e);
+        }
+        return null;
     }
 
 }

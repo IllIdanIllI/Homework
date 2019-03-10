@@ -3,3 +3,5 @@ Chocolate,Alpen Gold,3,4,2,rectangle
 Candy,M&M's,2,10,1,circle
 Marshmallow,Krasny Pischezic,20,10,1,circle
 Candy,Grilyaz,10,20,2,rectangle
+Candyr,Grilyaz,10,20,2,rectangle
+1,1,1

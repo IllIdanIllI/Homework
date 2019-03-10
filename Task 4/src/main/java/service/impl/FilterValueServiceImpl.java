@@ -26,7 +26,7 @@ public class FilterValueServiceImpl implements FilterValueService {
     }
 
     @Override
-    public void find_In_Range_Of_Sugar(List<Sweetness> list, short low, short high) {
+    public void findInRangeOfSugar(List<Sweetness> list, short low, short high) {
         list.stream().filter(sweetness -> low < sweetness.getSugarValue()
                 && sweetness.getSugarValue() < high)
                 .forEach(sweetness -> System.out.println(sweetness));
