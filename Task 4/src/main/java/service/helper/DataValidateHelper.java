@@ -56,9 +56,9 @@ public class DataValidateHelper {
         }
         return null;
     }
-    public boolean areConditionRight(String type, String name,
-                                     short sugarValue, int weight,
-                                     short quantity, String form){
+    public boolean areConditionRight(final String type,final String name,
+                                     final short sugarValue,final int weight,
+                                     final short quantity,final String form){
         return name != null && type != null
                 && sugarValue > 0 && weight > 0
                 && quantity > 0 && form != null;

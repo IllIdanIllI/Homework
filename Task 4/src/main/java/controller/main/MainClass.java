@@ -4,7 +4,7 @@ package controller.main;
 import service.GiftHandlerService;
 import service.impl.SweetnessHandlerServiceImpl;
 
-public class MainClass {
+ class MainClass {
 
     public static void main(String[] args) {
 //        long start = System.nanoTime();

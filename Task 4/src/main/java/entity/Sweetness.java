@@ -5,7 +5,7 @@ public abstract class Sweetness {
     private String name;
     private short sugarValue;
     private int weight;
-
+    private short quantity;
     public Sweetness() {
     }
 
@@ -17,7 +17,7 @@ public abstract class Sweetness {
         this.quantity = quantity;
     }
 
-    private short quantity;
+
 
     public String getType() {
         return type;
@@ -55,7 +55,7 @@ public abstract class Sweetness {
         return quantity;
     }
 
-    public void setQuantity(byte quantity) {
+    public void setQuantity(short quantity) {
         this.quantity = quantity;
     }
 
@@ -69,7 +69,7 @@ public abstract class Sweetness {
                 '}';
     }
 
-    public abstract void setForm(String form);
 
     public abstract String getForm();
+
 }
